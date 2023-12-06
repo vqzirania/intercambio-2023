@@ -2,20 +2,10 @@ import streamlit as st
 from streamlit.logger import get_logger
 import copy
 import random
-# '''
-# To fix constant rebooting
-# write pairs inro a json,
-# then read out of it.
-# '''
 
 LOGGER = get_logger(__name__)
-st.title(":santa::gift: Intercambio de Regalos 2023")
-st.markdown(
-    """
-    Vamos a hacer el sorteo para el intercambio de regalos de este año atraves de este link. \n
-    Las mamas de niños pequeños, pueden ingresar el nombre de su hijo(a) abajo, para ver el nombre de la persona que le toca. 
-    """
-    )
+st.title("Intercambio de Regalos 2023")
+st.subheader("Vamos a hacer el sorteo para el intercambio de regalos de este año atraves de este link. \n Las mamas de niños chiquitos, pueden ver el nombre de la persona que va a recibir regalo de su hijo(a), ingresando el nombre de su hijo(a) abajo.")
 
 st.warning("**ATTENCION:** Anota el nombre que te toco. Se borrara el nombre de el registro despues de poner tu nombre.")
 
@@ -28,11 +18,7 @@ st.warning("**ATTENCION:** Anota el nombre que te toco. Se borrara el nombre de 
 fams = [
         ["IRANIA", "JHOVANNA", "DOMINGO", "GUADALUPE"],
         ["MARIA", "CHRISTIAN"],
-        ["OSCAR", "JASMIN", "AXEL", "ANTHONY"],
-        ["MARICELA", "PATO", "LENNY","VANESSA","ISABELLA"],
-        ["ALEJANDRA","JUAN","JOHANNA","JARE", "JAYLIN"],
-        ["OLIVIA","FREDDY","FRIDA","KENDRA"],
-        ["MAMA CHUCHA","PAPA GERARDO"]
+        ["OSCAR", "JASMIN", "AXEL", "ANTHONY"]
         
         ]
 
@@ -56,11 +42,11 @@ def secret_santa(names):
         # print('this is the original names:', names)
         names.pop(names.index(fam)) # Removes a person from choosing themself # With Fam, removes the whole fam from being selected by one another
         names = sum(names,[]) # Removing lists from lists
-        print('names after pop:', names)
+        # print('names after pop:', names)
         for person in fam:
-            print(person)
+            # print(person)
             chosen = random.choice(list(set(choose)&set(names)))
-            print(list(set(choose)&set(names)))
+            # print(list(set(choose)&set(names)))
             result[person] = chosen
             choose.pop(choose.index(chosen))
     return result
