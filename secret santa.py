@@ -1,32 +1,22 @@
-import streamlit as st
-from streamlit.logger import get_logger
 import copy
 import random
-
-LOGGER = get_logger(__name__)
-st.title("Intercambio de Regalos 2023")
-st.subheader("Vamos a hacer el sorteo para el intercambio de regalos de este año atraves de este link. \n Las mamas de niños chiquitos, pueden ver el nombre de la persona que va a recibir regalo de su hijo(a), ingresando el nombre de su hijo(a) abajo.")
-
-st.warning("**ATTENCION:** Anota el nombre que te toco. Se borrara el nombre de el registro despues de poner tu nombre.")
-
+import json
 
 # PARTICIPANTS
-# fam1 = ["Irania", "Jhovanna", "Domingo", "Guadalupe"]
-# fam2 = ["Maria", "Christian"]
-# fam3 = ["Oscar", "Jazmin", "Axel", "Anthony"]
-
+# Same as original
 fams = [
         ["IRANIA", "JHOVANNA", "DOMINGO", "GUADALUPE"],
         ["MARIA", "CHRISTIAN"],
-        ["OSCAR", "JASMIN", "AXEL", "ANTHONY"]
+        ["OSCAR", "JASMIN", "AXEL", "ANTHONY"],
+        ["MARICELA", "PATO", "LENNY","VANESSA","ISABELLA"],
+        ["ALEJANDRA","JUAN","JOHANNA","JARE", "JAYLIN"],
+        ["OLIVIA","FREDDY","FRIDA","KENDRA"],
+        ["MAMA CHUCHA","PAPA GERARDO"]
         
         ]
-
 names = sum(fams, []) # makes one list from lists of lists
-st.write("Las personas participando son:", names)
 
-
-# CREATING PAIRINGS
+# CREATING PAIRINGS DEFINITION
 def secret_santa(names):
     my_list = fams
     choose = copy.copy(names) 
@@ -51,21 +41,23 @@ def secret_santa(names):
             choose.pop(choose.index(chosen))
     return result
 
-ss_result = secret_santa(names)
-# print('results:', ss_result)
+# GETTING THE PAIRS
+for i in range(10):  # try 10 times
+    try:
+        # getting the secret santa names
+        ss_result = secret_santa(names)
+        # print('results:', ss_result)
+        break # as soon as it works, break out of the loop
+    
+    # Handling our index error, where we run out of ppl from a different fam
+    # Note: when plugging in fam names:
+    # Place larger families first!
+    except IndexError:
+        continue # means try again
 
+with open("pairs.json", "w") as pairings:
+    json.dump(ss_result, pairings)
 
-# ENTERING NAME + DISPLAYING PAIR
-person = st.text_input("**Ingresa tu nombre aqui:**").upper()
-if st.button("Listo"):
-    result = ss_result.pop(person)
-    st.success("Listo " + person + ", la persona a quien te toco es: " + result)
-
-
-#popoutnames = 
-#st.write("las personas que ya han visto la persona que le toca son:", popoutnames)
-
-
-
-
-
+# Making a Backup file
+with open("backuppairs.json", "w") as pairings:
+    json.dump(ss_result, pairings)
