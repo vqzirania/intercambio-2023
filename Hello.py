@@ -65,15 +65,20 @@ try:
 except KeyError:
     st.error("Esta persona no esta en la lista de participantes, o ya ha visto la persona que le toca.")
 
+
+
 # REMOVING NAMES FROM THE LIST
+popoutnames = []
+popoutnames.append(person)
+st.write("Las personas que ya han visto la persona que le toca son:", popoutnames)
 
-# print(ss_result[person])
-# del ss_result[person]
-# popoutnames = []
-# popoutnames.append(person)
-# st.write("Las personas que ya han visto la persona que le toca son:", popoutnames)
+# SAVING THE LIST OF PEOPLE WHO ALREADY PARTICIPATED
 
-# # print(ss_result)
+
+# SAVING THE ERASED NAMES OF PEOPLE TO JSON
+# This is to avoid others from looking up who others got
+with open("pairs.json", "w") as pairings:
+    json.dump(ss_result,pairings)
 
 
 
