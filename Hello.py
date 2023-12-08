@@ -162,6 +162,8 @@ if st.button("Buscar"):
     # Verify if the person is using the right spelling
     if search in names:
         try:
+            # NOTE: Siince I am opening a json as read, the file must be created manually if new
+            # and since it is a dictionary, you MUST INCLUDE "{}" IN A NEW FILE.
             with open("sizes.json", "r") as sizes:
                 dic = json.load(sizes)
             # shirt_size = dic[search]["Talla de camisa"]
