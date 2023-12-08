@@ -1,3 +1,7 @@
+# WHEN READY TO COMMIT TO CHANGES
+# Click on the side tabe "share looking " icon, click commit
+# Type "commit" click the check mark next to the tab,
+# Then click sync
 import streamlit as st
 # from streamlit.logger import get_logger
 import json
@@ -38,14 +42,13 @@ st.warning(
 # PASTE INTO SECRET SANTA
 fams = [
         ["IRANIA", "JHOVANNA", "DOMINGO", "GUADALUPE"],
-        ["MARIA", "CHRISTIAN"],
+        ["MARIA", "CHRISTIAN", "CHUCHA"],
         ["OSCAR", "JASMIN", "AXEL", "ANTHONY"],
-        ["MARICELA", "PATO", "LENNY","VANESSA","ISABELLA"],
+        ["MARICELA", "PATO", "LENNY","VANESSA","ISABELLA","GERARDO"],
         ["ALEJANDRA VAZQUEZ","JUAN","JOHANNA","YARE", "JAYLIN"],
         ["PEPE", "JESSICA", "MATEO","JIROSHI","MAX"],
         ["OLIVIA","FREDDY","FRIDA","KENDRA"],
         ["ALEJANDRA MENDEZ","TITO","DAVID"],
-        ["MAMA CHUCHA","PAPA GERARDO"],
         ["TONIO"]
         
         ]
@@ -95,7 +98,7 @@ try:
         else:
             st.error("Ya has visto la persona que te toca.")
 
-# If they arent on the original list using their correct name
+# If an unexpected error occurs
 except KeyError:
     st.error("Ocurrio un error. Contacta Irania")
 
@@ -117,11 +120,64 @@ with open("pairs.json", "w") as pairings:
 
 
 ## GETTING SIZES AND INFO
-# st.write("##### Dale un poco de informacion a la persona que te dara un regalo. :hugging_face:")
+st.write("##### Dale un poco de informacion a la persona que te dara un regalo. :hugging_face:")
 
-# person = st.text_input('Confirma tu nombre, escrito como esta en la lista de participantes:')
-# shirt_size = st.text_input('Cual es tu talla de camisa?')
-# pants_size = st.text_input('Cual es tu talla de pantalon?')
-# shoe_size = st.text_input('Cual es tu talla de zapato? (talla US)')
+person = st.text_input('Confirma tu nombre, escrito como esta en la lista de participantes:').upper()
+shirt_size = st.text_input('Cual es tu talla de camisa?')
+pants_size = st.text_input('Cual es tu talla de pantalon?')
+shoe_size = st.text_input('Cual es tu talla de zapato? (talla US)')
 
-# with open("sizes.json", "w") as
+
+if st.button("Guarda Informacion"):
+    # Verify if the person is using the right spelling
+    if person in names:
+        # make dictionary of info
+        # NOTE: If a person modifies their info, it is automatically overwritten saving the new version
+        info = {
+            person:{"Talla de camisa": shirt_size,
+                    "Talla de pantalon": pants_size,
+                    "Talla de zapato": shoe_size}
+        }
+
+        # Getting stored sizes dictionary
+        with open("sizes.json", "r") as sizes:
+            dic = json.load(sizes)
+            # Merging two dictionaries- old info + new info
+            dic.update(info)
+
+        # Saving updated dictionary
+        with open("sizes.json", "w") as sizes:
+            json.dump(dic, sizes, indent= 4)
+        st.success("Tu informacion se ha guardado.")
+
+    elif person not in names:
+        st.error("Esta persona no esta en la lista de participantes. Usa la lista de participantes como guia y corrige tu otographia.")
+
+## DISPLAYING SIZES AND INFO
+st.write("#### Busca la informacion de la persona que te toco :mag: :")
+
+search = st.text_input("Quien te toco?").upper()
+if st.button("Buscar"):
+    # Verify if the person is using the right spelling
+    if search in names:
+        try:
+            with open("sizes.json", "r") as sizes:
+                dic = json.load(sizes)
+            # shirt_size = dic[search]["Talla de camisa"]
+            # pants_size = dic[search]["Talla de pantalon"]
+            # shoe_size = dic[search]["Talla de zapato"]
+
+            st.success(f'''
+                    Esta es la informacion de {search}:\n
+                    Talla de camisa:   {dic[search]["Talla de camisa"]}
+
+                    Talla de pantalon:  {dic[search]["Talla de pantalon"]}
+
+                    Talla de zapato:   {dic[search]["Talla de zapato"]}
+                    ''')
+        
+        except KeyError:
+            st.info(search + " ahun no a agregado su informacion.")
+
+    else: # OR elif search not in names:
+        st.error("Esta persona no esta en la lista de participantes. Usa la lista de participantes como guia y corrige tu otographia.")
