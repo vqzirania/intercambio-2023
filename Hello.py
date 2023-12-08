@@ -180,7 +180,7 @@ if st.button("Buscar"):
                     ''')
         
         except KeyError:
-            st.info(search + " ahun no a agregado su informacion.")
+            st.info(search + " aun no a agregado su informacion.")
 
     else: # OR elif search not in names:
         st.error("Esta persona no esta en la lista de participantes. Usa la lista de participantes como guia y corrige tu otographia.")
