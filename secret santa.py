@@ -1,3 +1,6 @@
+### IMPORTANT ###
+# THIS FILE CREATES THE PAIRINGS FOR SECRET SANTA!
+
 import copy
 import random
 import json
@@ -9,9 +12,12 @@ fams = [
         ["MARIA", "CHRISTIAN"],
         ["OSCAR", "JASMIN", "AXEL", "ANTHONY"],
         ["MARICELA", "PATO", "LENNY","VANESSA","ISABELLA"],
-        ["ALEJANDRA","JUAN","JOHANNA","JARE", "JAYLIN"],
+        ["ALEJANDRA VAZQUEZ","JUAN","JOHANNA","YARE", "JAYLIN"],
+        ["PEPE", "JESSICA", "MATEO","JIROSHI","MAX"],
         ["OLIVIA","FREDDY","FRIDA","KENDRA"],
-        ["MAMA CHUCHA","PAPA GERARDO"]
+        ["ALEJANDRA MENDEZ","TITO","DAVID"],
+        ["MAMA CHUCHA","PAPA GERARDO"],
+        ["TONIO"]
         
         ]
 names = sum(fams, []) # makes one list from lists of lists
