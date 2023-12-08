@@ -116,4 +116,12 @@ with open("pairs.json", "w") as pairings:
     json.dump(ss_result,pairings)
 
 
+# GETTING SIZES AND INFO
+# st.write("##### Dale un poco de informacion a la persona que te dara un regalo. :hugging_face:")
 
+# person = st.text_input('Confirma tu nombre, escrito como esta en la lista de participantes:')
+# shirt_size = st.text_input('Cual es tu talla de camisa?')
+# pants_size = st.text_input('Cual es tu talla de pantalon?')
+# shoe_size = st.text_input('Cual es tu talla de zapato? (talla US)')
+
+# with open("sizes.json", "w") as
