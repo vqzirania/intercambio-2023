@@ -66,6 +66,7 @@ st.write("Las personas participando son:", names_displayed)
 
 
 # ENTERING NAME + DISPLAYING PAIR
+st.write("##### Ve quien te toco. :santa:")
 person = st.text_input("**Ingresa tu nombre aqui:**").upper().strip()
 
 # Opening the json files
