@@ -158,7 +158,7 @@ if st.button("Guarda Informacion"):
 ## DISPLAYING SIZES AND INFO
 st.write("#### Busca la informacion de la persona que te toco :mag: :")
 
-search = st.text_input("Quien te toco?").upper()
+search = st.text_input("Quien te toco?").upper().strip()
 if st.button("Buscar"):
     # Verify if the person is using the right spelling
     if search in names:
