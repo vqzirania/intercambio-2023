@@ -57,7 +57,7 @@ fams = [
 # Making a nice list of names
 names = sum(fams, []) # makes one list from lists of lists
 
-names_displayed = ["IRANIA", "JHOVANNA", "DOMINGO", "GUADALUPE","MARIA", "CHRISTIAN","OSCAR", "JASMIN", "AXEL (8 años)", "ANTHONY (5 años)","MARICELA", "PATO", "LENNY (6 años)","VANESSA (3 años)","ISABELLA (BABY)","ALEJANDRA VAZQUEZ","JUAN","JOHANNA (16 años)","YARE (6 años)", "JAYLIN (5 años)","OLIVIA","FREDDY","FRIDA (4 años)","KENDRA (9 años)","MAMA CHUCHA","PAPA GERARDO","TONIO", "PEPE", "JESSICA", "MATEO (16 años)","JIROSHI (12 años)","MAX (6 años)","ALEJANDRA MENDEZ","TITO","DAVID (5 años)"]
+names_displayed = ["IRANIA", "JHOVANNA", "DOMINGO", "GUADALUPE","MARIA", "CHRISTIAN","OSCAR", "JASMIN", "AXEL (8 años)", "ANTHONY (5 años)","MARICELA", "PATO", "LENNY (6 años)","VANESSA (3 años)","ISABELLA (BABY)","ALEJANDRA VAZQUEZ","JUAN","JOHANNA (16 años)","YARE (6 años)", "JAYLIN (5 años)","OLIVIA","FREDDY","FRIDA (4 años)","KENDRA (9 años)","CHUCHA","GERARDO","TONIO", "PEPE", "JESSICA", "MATEO (16 años)","JIROSHI (12 años)","MAX (6 años)","ALEJANDRA MENDEZ","TITO","DAVID (5 años)"]
 st.write("Las personas participando son:", names_displayed)
 
 
@@ -66,7 +66,7 @@ st.write("Las personas participando son:", names_displayed)
 
 
 # ENTERING NAME + DISPLAYING PAIR
-person = st.text_input("**Ingresa tu nombre aqui:**").upper()
+person = st.text_input("**Ingresa tu nombre aqui:**").upper().strip()
 
 # Opening the json files
 with open("pairs.json", "r") as pairings:
@@ -123,7 +123,7 @@ with open("pairs.json", "w") as pairings:
 ## GETTING SIZES AND INFO
 st.write("##### Dale un poco de informacion a la persona que te dara un regalo. :hugging_face:")
 
-person = st.text_input('Confirma tu nombre, escrito como esta en la lista de participantes:').upper()
+person = st.text_input('Confirma tu nombre, escrito como esta en la lista de participantes:').upper().strip()
 shirt_size = st.text_input('Cual es tu talla de camisa?')
 pants_size = st.text_input('Cual es tu talla de pantalon?')
 shoe_size = st.text_input('Cual es tu talla de zapato? (talla US)')
